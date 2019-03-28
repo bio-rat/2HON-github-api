@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Test_Data from "./TEST_DATA";
 
 import GetGithubApi from "./GetGithubApi";
 import NewIssueModal from "./NewIssueModal";
-import IssueList from "./IssueList";
+import IssueList from "./issueList";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
@@ -57,9 +58,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <GetGithubApi />
-        <IssueList />
-        <NewIssueModal />
+        <IssueList issueItem={Test_Data} />
       </div>
     );
   }
