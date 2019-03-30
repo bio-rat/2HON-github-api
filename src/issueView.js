@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Media, Container, Row, Col } from "reactstrap";
+import { Button, Container, Row, Col } from "reactstrap";
 import "./issueView.css";
 import ReactMarkdown from "react-markdown";
 import LabelsView from "./labelsView";
@@ -13,7 +13,16 @@ export default class issueView extends Component {
           <Col xs="9" className="issueContent text-left py-4 pl-4 pr-0">
             <div>
               <h3>
-                #{this.props.number} {this.props.title}
+                #{this.props.number} {this.props.title}{" "}
+                {this.props.state === "open" ? (
+                  <Button size="sm" outline disabled color="primary">
+                    OPEN ISSUE
+                  </Button>
+                ) : (
+                  <Button size="sm" outline disabled color="secondary">
+                    CLOSE ISSUE
+                  </Button>
+                )}
               </h3>
             </div>
             <div>
