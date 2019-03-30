@@ -13,7 +13,7 @@ export default class issueView extends Component {
           <Col xs="9" className="issueContent text-left py-4 pl-4 pr-0">
             <div>
               <h3>
-                #{this.props.number} {this.props.title}{" "}
+                {/* Title */}#{this.props.number} {this.props.title}{" "}
                 {this.props.state === "open" ? (
                   <Button size="sm" outline disabled color="primary">
                     OPEN ISSUE
@@ -25,11 +25,16 @@ export default class issueView extends Component {
                 )}
               </h3>
             </div>
+            {/* Body */}
             <div>
               <ReactMarkdown source={this.props.body} />
             </div>
           </Col>
-          <Col xs="3" className="issueUser text-right py-4 pr-4 pl-0">
+          {/* User */}
+          <Col
+            xs="3"
+            className="issueUser text-right py-4 pr-4 pl-0 d-flex flex-column align-items-end"
+          >
             <img
               src={this.props.user.avatar_url}
               className=" border rounded my-1"
@@ -55,6 +60,9 @@ export default class issueView extends Component {
                 ago.
               </span>
             )}
+            <Button size="sm" color="danger" className="mt-auto">
+              Close Issue
+            </Button>
           </Col>
         </Row>
       </Container>

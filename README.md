@@ -9,6 +9,7 @@
 
 - npm install --save moment react-moment
 - npm install --save moment-timezone
+- npm install react-icons --save
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

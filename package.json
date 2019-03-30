@@ -9,6 +9,7 @@
     "moment-timezone": "^0.5.23",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-icons": "^3.5.0",
     "react-markdown": "^4.0.6",
     "react-moment": "^0.8.4",
     "react-reactstrap-pagination": "^1.0.5",

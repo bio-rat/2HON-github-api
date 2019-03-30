@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Test_Data from "./TEST_DATA";
-
-import GetGithubApi from "./GetGithubApi";
 import NewIssueModal from "./NewIssueModal";
 import IssueList from "./issueList";
+import GetGithubApi from "./getGithubApi";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
@@ -54,11 +53,52 @@ class App extends Component {
       issues: json
     });
   }
+  handleTextChange = e => {
+    //split input value
+    const textValue = e.target.value.split("/");
+    // join 2 last text in array to form filteredText
+    const filteredText = [
+      textValue[textValue.length - 2],
+      textValue[textValue.length - 1]
+    ].join("/");
+
+    this.setState({
+      filteredText: filteredText
+    });
+  };
+
+  async handleGetData() {
+    const repoUrl = this.state.filteredText;
+    const selectedPage = this.state.selectedPage;
+    const url = `https://api.github.com/repos/${repoUrl}/issues?per_page=10&page=${selectedPage}`;
+    await fetch(url)
+      .then(resp => {
+        if (resp.ok) {
+          return resp;
+        } else {
+          let error = new Error("This repo does not exist. Please try again");
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          issues: json
+        });
+      })
+      .catch(error => {
+        alert(`${error.message}`);
+      });
+  }
 
   render() {
     return (
       <div className="App">
-        <IssueList issueItem={Test_Data} />
+        <GetGithubApi
+          onInputChange={this.handleTextChange}
+          onSearchRepo={() => this.handleGetData()}
+        />
+        <IssueList issueItem={this.state.issues} />
       </div>
     );
   }
