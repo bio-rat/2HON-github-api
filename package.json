@@ -5,9 +5,12 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "dotenv": "^7.0.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.23",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-markdown": "^4.0.6",
+    "react-moment": "^0.8.4",
     "react-reactstrap-pagination": "^1.0.5",
     "react-scripts": "2.1.8",
     "reactstrap": "^7.1.0",

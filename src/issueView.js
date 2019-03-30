@@ -3,6 +3,7 @@ import { Media, Container, Row, Col } from "reactstrap";
 import "./issueView.css";
 import ReactMarkdown from "react-markdown";
 import LabelsView from "./labelsView";
+import Moment from "react-moment";
 
 export default class issueView extends Component {
   render() {
@@ -28,6 +29,23 @@ export default class issueView extends Component {
             {this.props.labels.map(label => (
               <LabelsView {...label} />
             ))}
+            {this.props.created_at === this.props.update_at ? (
+              <span className="my-1">
+                Created{" "}
+                <Moment fromNow ago>
+                  {this.props.updated_at}
+                </Moment>{" "}
+                ago.
+              </span>
+            ) : (
+              <span className="my-1">
+                final editing{" "}
+                <Moment fromNow ago>
+                  {this.props.updated_at}
+                </Moment>{" "}
+                ago.
+              </span>
+            )}
           </Col>
         </Row>
       </Container>
