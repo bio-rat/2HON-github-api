@@ -6,6 +6,9 @@ import LabelsView from "./labelsView";
 import Moment from "react-moment";
 
 export default class issueView extends Component {
+  showNumber(number) {
+    alert(number);
+  }
   render() {
     return (
       <Container>
@@ -60,7 +63,13 @@ export default class issueView extends Component {
                 ago.
               </span>
             )}
-            <Button size="sm" color="danger" className="mt-auto">
+            {/* Close Issue */}
+            <Button
+              size="sm"
+              color="danger"
+              className="mt-auto"
+              onClick={() => this.props.closeIssue(this.props.number)}
+            >
               Close Issue
             </Button>
           </Col>

@@ -15,7 +15,7 @@ class App extends Component {
 
     const accessToken =
       window.location.search.split("=")[0] === "?access_token"
-        ? window.location.search.split("=")[1]
+        ? window.location.search.split("=")[1].split("&")[0]
         : null;
 
     if (!accessToken && !existingToken) {
@@ -43,6 +43,7 @@ class App extends Component {
       issues: [],
       token: this.state.token
     };
+    this.handleCloseIssue = this.handleCloseIssue.bind(this);
   }
 
   async componentDidMount() {
@@ -90,6 +91,26 @@ class App extends Component {
         alert(`${error.message}`);
       });
   }
+  async handleCloseIssue(number) {
+    let data = {
+      state: "closed"
+    };
+    console.log(this.state.token);
+    const url = `https://api.github.com/repos/etudeofmemories8698/2HON-github-api/issues/${number}`;
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `token ${this.state.token}`
+      },
+      body: JSON.stringify(data),
+      json: true
+    });
+    if (response) {
+      this.handleGetData();
+    }
+    console.log("response", response);
+  }
 
   render() {
     return (
@@ -98,7 +119,10 @@ class App extends Component {
           onInputChange={this.handleTextChange}
           onSearchRepo={() => this.handleGetData()}
         />
-        <IssueList issueItem={this.state.issues} />
+        <IssueList
+          issueItem={this.state.issues}
+          closeIssue={this.handleCloseIssue}
+        />
       </div>
     );
   }

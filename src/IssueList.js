@@ -10,7 +10,7 @@ export default class issueList extends Component {
         <IssuePagination />
         <div className="issueBody border">
           {this.props.issueItem.map(issue => (
-            <IssueView {...issue} />
+            <IssueView {...issue} closeIssue={this.props.closeIssue} />
           ))}
         </div>
       </div>
