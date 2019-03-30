@@ -1,3 +1,15 @@
+## Setup
+
+- npm install
+
+- npm install bootstrap --save
+- npm install --save reactstrap react react-dom
+
+- npm install --save react-markdown
+
+- npm install --save moment react-moment
+- npm install --save moment-timezone
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
