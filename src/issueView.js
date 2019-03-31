@@ -4,6 +4,7 @@ import "./issueView.css";
 import ReactMarkdown from "react-markdown";
 import LabelsView from "./labelsView";
 import Moment from "react-moment";
+import { Link } from "react-router-dom";
 
 export default class issueView extends Component {
   showNumber(number) {
@@ -16,7 +17,10 @@ export default class issueView extends Component {
           <Col xs="9" className="issueContent text-left py-4 pl-4 pr-0">
             <div>
               <h3>
-                {/* Title */}#{this.props.number} {this.props.title}{" "}
+                {/* Title */}
+                <Link key={this.props.id} to={"/issues/" + this.props.number}>
+                  #{this.props.number} {this.props.title}{" "}
+                </Link>
                 {this.props.state === "open" ? (
                   <Button size="sm" outline disabled color="primary">
                     OPEN ISSUE

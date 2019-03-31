@@ -13,6 +13,8 @@
     "react-markdown": "^4.0.6",
     "react-moment": "^0.8.4",
     "react-reactstrap-pagination": "^1.0.5",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "reactstrap": "^7.1.0",
     "request": "^2.88.0"
