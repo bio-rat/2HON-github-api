@@ -6,6 +6,7 @@ import NewIssueModal from "./NewIssueModal";
 import IssueList from "./IssueList";
 import GetGithubApi from "./GetGithubApi";
 import { Link, Route, BrowserRouter } from "react-router-dom";
+import { Button } from "reactstrap";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
@@ -127,8 +128,11 @@ class App extends Component {
         />
 
         <BrowserRouter>
-          <Link to="/issues">Click to open issues</Link>
-
+          <div className="d-flex justify-content-end buttonLink">
+            <Button outline color="secondary">
+              <Link to="/issues">Click to open issues</Link>
+            </Button>
+          </div>
           <Route
             path="/issues"
             render={props => (

@@ -1,0 +1,29 @@
+.issueBodyChil {
+  width: 80%;
+  margin-left: 10%;
+}
+.issueImg {
+  width: 70px;
+  height: 70px;
+  margin-left: 5px;
+}
+.talk {
+  width: 80px;
+  height: 78px;
+  background: #cec8c8;
+  position: relative;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+.talk:before {
+  content: "";
+  position: absolute;
+  right: -20%;
+  top: 30px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-left: 20px solid #cec8c8;
+  border-bottom: 10px solid transparent;
+}
