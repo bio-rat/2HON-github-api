@@ -3,8 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import Test_Data from "./TEST_DATA";
 import NewIssueModal from "./NewIssueModal";
-import IssueList from "./issueList";
-import GetGithubApi from "./getGithubApi";
+import IssueList from "./IssueList";
+import GetGithubApi from "./GetGithubApi";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
@@ -41,19 +41,13 @@ class App extends Component {
 
     this.state = {
       issues: [],
-      token: this.state.token
+      token: this.state.token,
+      selectedPage: 1
     };
     this.handleCloseIssue = this.handleCloseIssue.bind(this);
+    this.handleSelected = this.handleSelected.bind(this);
   }
 
-  async componentDidMount() {
-    const url = "https://api.github.com/repos/facebook/react/issues";
-    let resp = await fetch(url);
-    let json = await resp.json();
-    this.setState({
-      issues: json
-    });
-  }
   handleTextChange = e => {
     //split input value
     const textValue = e.target.value.split("/");
@@ -95,7 +89,6 @@ class App extends Component {
     let data = {
       state: "closed"
     };
-    console.log(this.state.token);
     const url = `https://api.github.com/repos/etudeofmemories8698/2HON-github-api/issues/${number}`;
     const response = await fetch(url, {
       method: "PATCH",
@@ -112,6 +105,15 @@ class App extends Component {
     console.log("response", response);
   }
 
+  handleSelected(selectedPage) {
+    this.setState(
+      {
+        selectedPage: selectedPage
+      },
+      () => this.handleGetData()
+    );
+  }
+
   render() {
     return (
       <div className="App">
@@ -122,6 +124,7 @@ class App extends Component {
         <IssueList
           issueItem={this.state.issues}
           closeIssue={this.handleCloseIssue}
+          onSelect={this.handleSelected}
         />
       </div>
     );

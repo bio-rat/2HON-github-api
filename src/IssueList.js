@@ -7,7 +7,7 @@ export default class issueList extends Component {
   render() {
     return (
       <div>
-        <IssuePagination />
+        <IssuePagination onSelect={this.props.onSelect} />
         <div className="issueBody border">
           {this.props.issueItem.map(issue => (
             <IssueView {...issue} closeIssue={this.props.closeIssue} />
