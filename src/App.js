@@ -5,6 +5,7 @@ import Test_Data from "./TEST_DATA";
 import NewIssueModal from "./NewIssueModal";
 import IssueList from "./IssueList";
 import GetGithubApi from "./GetGithubApi";
+import { Link, Route, BrowserRouter } from "react-router-dom";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
@@ -77,9 +78,12 @@ class App extends Component {
       })
       .then(response => response.json())
       .then(json => {
-        this.setState({
-          issues: json
-        });
+        this.setState(
+          {
+            issues: json
+          },
+          () => console.log(this.state.issues)
+        );
       })
       .catch(error => {
         alert(`${error.message}`);
@@ -121,11 +125,22 @@ class App extends Component {
           onInputChange={this.handleTextChange}
           onSearchRepo={() => this.handleGetData()}
         />
-        <IssueList
-          issueItem={this.state.issues}
-          closeIssue={this.handleCloseIssue}
-          onSelect={this.handleSelected}
-        />
+
+        <BrowserRouter>
+          <Link to="/issues">Click to open issues</Link>
+
+          <Route
+            path="/issues"
+            render={props => (
+              <IssueList
+                {...props}
+                issueItem={this.state.issues}
+                closeIssue={this.handleCloseIssue}
+                onSelect={this.handleSelected}
+              />
+            )}
+          />
+        </BrowserRouter>
       </div>
     );
   }
