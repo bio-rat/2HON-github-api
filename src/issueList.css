@@ -1,0 +1,7 @@
+.issueBody {
+  width: 80%;
+  margin-left: 10%;
+}
+.issueBody :hover {
+  background-color: lightsteelblue;
+}

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-
-import GetGithubApi from "./GetGithubApi";
+import Test_Data from "./TEST_DATA";
 import NewIssueModal from "./NewIssueModal";
-import IssueList from "./IssueList";
+import IssueList from "./issueList";
+import GetGithubApi from "./getGithubApi";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
@@ -15,7 +15,7 @@ class App extends Component {
 
     const accessToken =
       window.location.search.split("=")[0] === "?access_token"
-        ? window.location.search.split("=")[1]
+        ? window.location.search.split("=")[1].split("&")[0]
         : null;
 
     if (!accessToken && !existingToken) {
@@ -43,6 +43,7 @@ class App extends Component {
       issues: [],
       token: this.state.token
     };
+    this.handleCloseIssue = this.handleCloseIssue.bind(this);
   }
 
   async componentDidMount() {
@@ -53,13 +54,75 @@ class App extends Component {
       issues: json
     });
   }
+  handleTextChange = e => {
+    //split input value
+    const textValue = e.target.value.split("/");
+    // join 2 last text in array to form filteredText
+    const filteredText = [
+      textValue[textValue.length - 2],
+      textValue[textValue.length - 1]
+    ].join("/");
+
+    this.setState({
+      filteredText: filteredText
+    });
+  };
+
+  async handleGetData() {
+    const repoUrl = this.state.filteredText;
+    const selectedPage = this.state.selectedPage;
+    const url = `https://api.github.com/repos/${repoUrl}/issues?per_page=10&page=${selectedPage}`;
+    await fetch(url)
+      .then(resp => {
+        if (resp.ok) {
+          return resp;
+        } else {
+          let error = new Error("This repo does not exist. Please try again");
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          issues: json
+        });
+      })
+      .catch(error => {
+        alert(`${error.message}`);
+      });
+  }
+  async handleCloseIssue(number) {
+    let data = {
+      state: "closed"
+    };
+    console.log(this.state.token);
+    const url = `https://api.github.com/repos/etudeofmemories8698/2HON-github-api/issues/${number}`;
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `token ${this.state.token}`
+      },
+      body: JSON.stringify(data),
+      json: true
+    });
+    if (response) {
+      this.handleGetData();
+    }
+    console.log("response", response);
+  }
 
   render() {
     return (
       <div className="App">
-        <GetGithubApi />
-        <IssueList />
-        <NewIssueModal />
+        <GetGithubApi
+          onInputChange={this.handleTextChange}
+          onSearchRepo={() => this.handleGetData()}
+        />
+        <IssueList
+          issueItem={this.state.issues}
+          closeIssue={this.handleCloseIssue}
+        />
       </div>
     );
   }
