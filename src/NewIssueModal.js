@@ -54,7 +54,7 @@ export default class NewIssueModal extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "token 848817fbb5ec0c374a50b4cb99704785e9ebd534"
+        "Authorization": "token 03ac68410f60b52c614b921d791d996d0f8033ab"
       },
       body: JSON.stringify(data),
       json: true
@@ -81,9 +81,9 @@ export default class NewIssueModal extends Component {
         // onAfterOpen={this.showModal}
         >
           <div> <h1>New Issue Form </h1> </div>
-          <input id="title" type="text" placeholder="Title" onChange={() => this.updateInput1} />
+          <input id="title" type="text" placeholder="Title" onChange={(e) => this.updateInput1(e)} />
           <div>
-            <textarea id="comment" class="" placeholder="Leave a comment" onChange={() => this.updateInput2}> </textarea>
+            <textarea id="comment" class="" placeholder="Leave a comment" onChange={(e) => this.updateInput2(e)} />
           </div>
 
           <div>
@@ -95,7 +95,7 @@ export default class NewIssueModal extends Component {
         <div>
           <Button onClick={this.showModal}>
             {" "}New Issue{" "}  </Button>
-          {
+          {/* {
             this.state.apiItems &&
             this.state.apiItems.map(item => (
               <li>
@@ -103,7 +103,7 @@ export default class NewIssueModal extends Component {
                 {item.title}: {item.body}
               </li>
             ))
-          }
+          } */}
         </div >
       </div >
 
