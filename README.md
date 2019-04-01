@@ -22,7 +22,7 @@ Here's a walkthrough of implemented user stories.
 - [x] If the repository does not exist, the user should see a proper error message.
 - [x] The user should be able to see the following information for each issue:
 - [x] The user should be able to see the body of the issue rendered in markdown.
-- [ ] The user should be able to create a new issue via a modal for the repository, by clicking on a "new issue" button. Clicking on this button will pop open a modal that asks for the requisite fields.
+- [x] The user should be able to create a new issue via a modal for the repository, by clicking on a "new issue" button. Clicking on this button will pop open a modal that asks for the requisite fields.
 - [ ] If there is an error creating the issue (for example, the user not supplying all required parameters), there should be a nice error message to the user.
 
 ## Optional User Stories
