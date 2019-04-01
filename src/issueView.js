@@ -34,8 +34,12 @@ export default class issueView extends Component {
             </div>
             {/* Body */}
             <div>
-              <ReactMarkdown source={this.props.body.slice(0, 400)} />
-              {"Read More ..."}
+              <ReactMarkdown
+                source={this.props.body.substring(300, 0) + " ..."}
+              />
+              <Link key={this.props.id} to={"/issues/" + this.props.number}>
+                Read More ...
+              </Link>
             </div>
           </Col>
           {/* User */}
@@ -48,8 +52,8 @@ export default class issueView extends Component {
               className=" border rounded my-1"
             />
             <h6 className="my-1">@{this.props.user.login}</h6>
-            {this.props.labels.map(label => (
-              <LabelsView {...label} />
+            {this.props.labels.map((label, index) => (
+              <LabelsView key={index} {...label} />
             ))}
             {this.props.created_at === this.props.update_at ? (
               <span className="my-1">

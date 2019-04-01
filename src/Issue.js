@@ -67,8 +67,8 @@ export default class Issue extends Component {
             </Col>
             <Col xs="6" className="text-right">
               <div>
-                {currentIssue[0].labels.map(label => (
-                  <LabelsView {...label} />
+                {currentIssue[0].labels.map((label, index) => (
+                  <LabelsView key={index} {...label} />
                 ))}
               </div>
             </Col>

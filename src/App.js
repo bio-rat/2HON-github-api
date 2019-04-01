@@ -67,7 +67,7 @@ class App extends Component {
   async handleGetData() {
     const repoUrl = this.state.filteredText;
     const selectedPage = this.state.selectedPage;
-    const url = `https://api.github.com/repos/${repoUrl}/issues?per_page=10&page=${selectedPage}`;
+    const url = `https://api.github.com/repos/${repoUrl}/issues?state=all&per_page=10&page=${selectedPage}`;
     await fetch(url)
       .then(resp => {
         if (resp.ok) {
@@ -126,7 +126,7 @@ class App extends Component {
           onInputChange={this.handleTextChange}
           onSearchRepo={() => this.handleGetData()}
         />
-
+        <NewIssueModal token={this.state.token} />
         <BrowserRouter>
           <div className="d-flex justify-content-end buttonLink">
             <Button outline color="secondary">

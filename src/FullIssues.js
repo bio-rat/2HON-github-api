@@ -9,7 +9,11 @@ export default class FullIssues extends Component {
         <IssuePagination onSelect={this.props.onSelect} />
 
         {this.props.issueItem.map(issue => (
-          <IssueView {...issue} closeIssue={this.props.closeIssue} />
+          <IssueView
+            key={issue.number}
+            {...issue}
+            closeIssue={this.props.closeIssue}
+          />
         ))}
       </div>
     );
