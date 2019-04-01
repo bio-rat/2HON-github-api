@@ -34,7 +34,8 @@ export default class issueView extends Component {
             </div>
             {/* Body */}
             <div>
-              <ReactMarkdown source={this.props.body} />
+              <ReactMarkdown source={this.props.body.slice(0, 400)} />
+              {"Read More ..."}
             </div>
           </Col>
           {/* User */}
