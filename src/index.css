@@ -12,3 +12,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.modal-content {
+  border: 1px solid red;
+}
+.modal-header,
+.modal-body,
+.modal-footer {
+  border: 1px solid red;
+  padding: 30px;
+}
+.form-control {
+  width: 100%;
+}

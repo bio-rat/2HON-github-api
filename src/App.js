@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-
-import GetGithubApi from "./GetGithubApi";
-import NewIssueModal from "./NewIssueModal";
+import "./index.css";
 import IssueList from "./IssueList";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
@@ -41,7 +37,8 @@ class App extends Component {
 
     this.state = {
       issues: [],
-      token: this.state.token
+      token: this.state.token,
+      
     };
   }
 
@@ -53,13 +50,16 @@ class App extends Component {
       issues: json
     });
   }
-
+ 
+  
   render() {
+    
     return (
       <div className="App">
-        <GetGithubApi />
-        <IssueList />
-        <NewIssueModal />
+        
+        <IssueList issues={this.state.issues}/>
+        
+        
       </div>
     );
   }
