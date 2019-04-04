@@ -7,47 +7,73 @@ import IssueList from "./IssueList";
 import GetGithubApi from "./GetGithubApi";
 import { Link, Route, BrowserRouter } from "react-router-dom";
 import { Button } from "reactstrap";
+import netlify from "netlify-auth-providers";
 
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
 class App extends Component {
   constructor() {
     super();
-    const existingToken = sessionStorage.getItem("token");
 
-    const accessToken =
-      window.location.search.split("=")[0] === "?access_token"
-        ? window.location.search.split("=")[1].split("&")[0]
-        : null;
+    // const accessToken =
+    //   window.location.search.split("=")[0] === "?access_token"
+    //     ? window.location.search.split("=")[1].split("&")[0]
+    //     : null;
 
-    if (!accessToken && !existingToken) {
-      window.location.replace(
-        `https://github.com/login/oauth/authorize?scope=user:email,repo&client_id=${clientId}`
-      );
-    }
+    // if (!accessToken && !existingToken) {
+    //   window.location.replace(
+    //     `https://github.com/login/oauth/authorize?scope=user:email,repo&client_id=${clientId}`
+    //   );
+    // }
 
-    if (accessToken) {
-      console.log(`New accessToken: ${accessToken}`);
+    // if (accessToken) {
+    //   console.log(`New accessToken: ${accessToken}`);
 
-      sessionStorage.setItem("token", accessToken);
-      this.state = {
-        token: accessToken
-      };
-    }
+    //   sessionStorage.setItem("token", accessToken);
+    //   this.state = {
+    //     token: accessToken
+    //   };
+    // }
 
-    if (existingToken) {
-      this.state = {
-        token: existingToken
-      };
-    }
+    // if (existingToken) {
+    //   this.state = {
+    //     token: existingToken
+    //   };
+    // }
 
     this.state = {
       issues: [],
-      token: this.state.token,
+      // token: this.state.token,
       selectedPage: 1
     };
     this.handleCloseIssue = this.handleCloseIssue.bind(this);
     this.handleSelected = this.handleSelected.bind(this);
+  }
+
+  componentDidMount() {
+    this.authWithGitHub();
+  }
+
+  authWithGitHub() {
+    // const existingToken = sessionStorage.getItem("token");
+
+    return new Promise((resolve, reject) => {
+      var authenticator = new netlify({
+        site_id: "b159df13-65fa-4dcd-b725-cd79256fdee3"
+      });
+      authenticator.authenticate(
+        { provider: "github", scope: "public_repo,read:org,read:user" },
+        function(err, data) {
+          if (err) {
+            reject(err);
+          }
+          resolve(data);
+          this.setState({
+            token: data.token
+          });
+        }
+      );
+    });
   }
 
   handleTextChange = e => {
