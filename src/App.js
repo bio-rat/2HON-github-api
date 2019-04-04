@@ -14,36 +14,9 @@ const clientId = process.env.REACT_APP_CLIENT_ID;
 class App extends Component {
   constructor() {
     super();
-
-    // const accessToken =
-    //   window.location.search.split("=")[0] === "?access_token"
-    //     ? window.location.search.split("=")[1].split("&")[0]
-    //     : null;
-
-    // if (!accessToken && !existingToken) {
-    //   window.location.replace(
-    //     `https://github.com/login/oauth/authorize?scope=user:email,repo&client_id=${clientId}`
-    //   );
-    // }
-
-    // if (accessToken) {
-    //   console.log(`New accessToken: ${accessToken}`);
-
-    //   sessionStorage.setItem("token", accessToken);
-    //   this.state = {
-    //     token: accessToken
-    //   };
-    // }
-
-    // if (existingToken) {
-    //   this.state = {
-    //     token: existingToken
-    //   };
-    // }
-
     this.state = {
       issues: [],
-      // token: this.state.token,
+      token: "",
       selectedPage: 1
     };
     this.handleCloseIssue = this.handleCloseIssue.bind(this);
@@ -51,19 +24,22 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const existingToken = sessionStorage.getItem("token");
+
     var authenticator = new netlify({
       site_id: "57bf9bb8-c571-4f19-a5c9-49687ae9c8b6"
     });
-    // let fetchedToken = "test";
+
     authenticator.authenticate(
       { provider: "github", scope: "public_repo,read:org,read:user" },
       (err, data) => {
         this.setState(
           {
-            token: data.token
+            token: existingToken ? existingToken : data.token
           },
           () => console.log("token: ", this.state.token)
         );
+        !existingToken && sessionStorage.setItem("token", data.token);
       }
     );
   }
