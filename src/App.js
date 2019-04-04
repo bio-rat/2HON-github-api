@@ -68,9 +68,12 @@ class App extends Component {
             reject(err);
           }
           resolve(data);
-          this.setState({
-            token: data.token
-          });
+          this.setState(
+            {
+              token: data.token
+            },
+            () => console.log("token: ", this.state.token)
+          );
         }
       );
     });
