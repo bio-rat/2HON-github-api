@@ -38,12 +38,14 @@ class App extends Component {
             {
               token: data.token
             },
-            () => console.log("New token: ", this.state.token)
+            () => console.log("New token:", this.state.token)
           );
           sessionStorage.setItem("token", data.token);
         }
       );
     } else if (existingToken) {
+      console.log("Existing token from session storage:", this.state.token);
+
       this.setState({
         token: existingToken
       });
