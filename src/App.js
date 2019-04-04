@@ -30,18 +30,24 @@ class App extends Component {
       site_id: "57bf9bb8-c571-4f19-a5c9-49687ae9c8b6"
     });
 
-    authenticator.authenticate(
-      { provider: "github", scope: "public_repo,read:org,read:user" },
-      (err, data) => {
-        this.setState(
-          {
-            token: existingToken ? existingToken : data.token
-          },
-          () => console.log("token: ", this.state.token)
-        );
-        !existingToken && sessionStorage.setItem("token", data.token);
-      }
-    );
+    if (!existingToken) {
+      authenticator.authenticate(
+        { provider: "github", scope: "public_repo,read:org,read:user" },
+        (err, data) => {
+          this.setState(
+            {
+              token: data.token
+            },
+            () => console.log("New token: ", this.state.token)
+          );
+          sessionStorage.setItem("token", data.token);
+        }
+      );
+    } else if (existingToken) {
+      this.setState({
+        token: existingToken
+      });
+    }
   }
 
   handleTextChange = e => {
