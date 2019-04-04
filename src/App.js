@@ -48,13 +48,14 @@ class App extends Component {
     };
     this.handleCloseIssue = this.handleCloseIssue.bind(this);
     this.handleSelected = this.handleSelected.bind(this);
+    this.authWithGitHub = this.authWithGitHub.bind(this);
   }
 
   componentDidMount() {
     this.authWithGitHub();
   }
 
-  authWithGitHub = () => {
+  authWithGitHub() {
     // const existingToken = sessionStorage.getItem("token");
 
     return new Promise((resolve, reject) => {
@@ -77,7 +78,7 @@ class App extends Component {
         }
       );
     });
-  };
+  }
 
   handleTextChange = e => {
     //split input value
