@@ -14,6 +14,8 @@ Here's a walkthrough of implemented user stories.
 
 ## Netlify link
 
+https://netlify-2hon-github-api.netlify.com
+
 ## Team member
 
 ## Required User Stories
