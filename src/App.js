@@ -54,7 +54,7 @@ class App extends Component {
     this.authWithGitHub();
   }
 
-  authWithGitHub() {
+  authWithGitHub = () => {
     // const existingToken = sessionStorage.getItem("token");
 
     return new Promise((resolve, reject) => {
@@ -77,7 +77,7 @@ class App extends Component {
         }
       );
     });
-  }
+  };
 
   handleTextChange = e => {
     //split input value
