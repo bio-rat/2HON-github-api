@@ -44,7 +44,7 @@ class App extends Component {
         }
       );
     } else if (existingToken) {
-      console.log("Existing token from session storage:", this.state.token);
+      console.log("Existing token from session storage:", existingToken);
 
       this.setState({
         token: existingToken
