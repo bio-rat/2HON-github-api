@@ -51,26 +51,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    return new Promise((resolve, reject) => {
-      var authenticator = new netlify({
-        site_id: "57bf9bb8-c571-4f19-a5c9-49687ae9c8b6"
-      });
-      authenticator.authenticate(
-        { provider: "github", scope: "public_repo,read:org,read:user" },
-        function(err, data) {
-          if (err) {
-            reject(err);
-          }
-          resolve(data);
-          this.setState(
-            {
-              token: data.token
-            },
-            () => console.log("token: ", this.state.token)
-          );
-        }
-      );
+    var authenticator = new netlify({
+      site_id: "57bf9bb8-c571-4f19-a5c9-49687ae9c8b6"
     });
+    authenticator.authenticate(
+      { provider: "github", scope: "public_repo,read:org,read:user" },
+      data =>
+        this.setState(
+          {
+            token: data.token
+          },
+          () => console.log("token: ", this.state.token)
+        )
+    );
   }
 
   handleTextChange = e => {
