@@ -53,7 +53,7 @@ export default class NewIssueModal extends Component {
   }
 
   async creatNewIssue() {
-    console.log("hi" + this.state.newInput1 + this.state.newInput2);
+    // console.log("hi" + this.state.newInput1 + this.state.newInput2);
     this.setState({ allerton: true });
     const data = { title: this.state.newInput1, body: this.state.newInput2 };
     const url =
@@ -70,7 +70,7 @@ export default class NewIssueModal extends Component {
       json: true
     });
     let json = await response.json();
-    console.log(json);
+    console.log(response);
     this.setState({
       isModalopen: false
     });
