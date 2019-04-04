@@ -59,7 +59,7 @@ class App extends Component {
     authenticator.authenticate(
       { provider: "github", scope: "public_repo,read:org,read:user" },
       function(err, data) {
-        fetchedToken = data.token;
+        fetchedToken = "lmao";
       }
     );
     this.setState(
