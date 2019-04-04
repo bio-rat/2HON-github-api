@@ -54,7 +54,7 @@ class App extends Component {
     var authenticator = new netlify({
       site_id: "57bf9bb8-c571-4f19-a5c9-49687ae9c8b6"
     });
-    let fetchedToken;
+    let fetchedToken = "test";
     console.log("authen: ", authenticator);
     authenticator.authenticate(
       { provider: "github", scope: "public_repo,read:org,read:user" },
