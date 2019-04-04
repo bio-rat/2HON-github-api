@@ -48,16 +48,9 @@ class App extends Component {
     };
     this.handleCloseIssue = this.handleCloseIssue.bind(this);
     this.handleSelected = this.handleSelected.bind(this);
-    this.authWithGitHub = this.authWithGitHub.bind(this);
   }
 
   componentDidMount() {
-    this.authWithGitHub();
-  }
-
-  authWithGitHub() {
-    // const existingToken = sessionStorage.getItem("token");
-
     return new Promise((resolve, reject) => {
       var authenticator = new netlify({
         site_id: "57bf9bb8-c571-4f19-a5c9-49687ae9c8b6"
